@@ -1,0 +1,23 @@
+{
+  "name": "myitsolver",
+  "version": "1.0.0",
+  "description": "test excercise for MyITSolver application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danikincs/MyITSolver.git"
+  },
+  "author": "daniel.kincses",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danikincs/MyITSolver/issues"
+  },
+  "homepage": "https://github.com/danikincs/MyITSolver#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  }
+}
