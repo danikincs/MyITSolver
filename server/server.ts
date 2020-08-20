@@ -7,11 +7,17 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {Article} from "./models/article";
 import dotenv from "dotenv";
-
+import bodyParser from 'body-parser';
 
 dotenv.config();
 const app = express();
 const port = 3000;
+
+//Bodyparser
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
 //database
 createConnection({
@@ -27,15 +33,14 @@ createConnection({
     synchronize: true,
     logging: false,
 }).then(connection => {
-    // here you can start to work with your entities
+    console.log("connection created")
 }).catch(error => console.log("Volt egy errorom", error));
-
 
 app.use('/api/token', token);
 app.use('/api/article', article);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.sendFile(__dirname + '/view/index.html')
 })
 
 app.listen(port, () => {

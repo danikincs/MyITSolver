@@ -20,6 +20,6 @@ export class Article {
     @Column("text")
     imageUrl: string;
 
-    @Column("time")
-    createdDate: number;
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
+    time: string;
 }

@@ -1,16 +1,19 @@
 import express from 'express';
-var router = express.Router();
+import { ArticleController } from "../controllers/articleController";
 
-router.get('/get/{id}', function (req, res) {
-  res.send('get by id')
+const router = express.Router();
+
+
+router.get('/get', function (req, res, next) {
+  ArticleController.get_article_by_id(req, res, next)
 })
 
-router.get('/list', function (req, res) {
-  res.send('getList')
+router.get('/list', function (req, res, next) {
+  ArticleController.get_articles(req, res, next)
 })
 
-router.post('/create', function (req, res) {
-    res.send('create')
-  })
+router.post('/create', function (req, res, next) {
+  ArticleController.create_article(req, res, next)
+})
 
 export default router;
