@@ -1,4 +1,4 @@
-var express = require('express');
+import express from 'express';
 var router = express.Router();
 
 router.get('/createToken', function (req, res) {
@@ -9,4 +9,4 @@ router.post('/renewToken', function (req, res) {
   res.send('renewToken')
 })
 
-module.exports = router
+export default router;

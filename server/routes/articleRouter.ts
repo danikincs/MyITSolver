@@ -1,4 +1,4 @@
-var express = require('express');
+import express from 'express';
 var router = express.Router();
 
 router.get('/get/{id}', function (req, res) {
@@ -6,11 +6,11 @@ router.get('/get/{id}', function (req, res) {
 })
 
 router.get('/list', function (req, res) {
-  res.send('renewToken')
+  res.send('getList')
 })
 
 router.post('/create', function (req, res) {
-    res.send('renewToken')
+    res.send('create')
   })
 
-module.exports = router
+export default router;
