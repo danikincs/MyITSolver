@@ -1,12 +1,19 @@
 import express from 'express';
-var router = express.Router();
+const router = express.Router();
+import {auth} from "../middleware/auth";
 
-router.get('/createToken', function (req, res) {
-  res.send('CreateToken')
+import { TokenService } from "../service/tokenService";
+
+router.get('/create', function (req, res, next) {
+  TokenService.create(req, res, next);
 })
 
-router.post('/renewToken', function (req, res) {
-  res.send('renewToken')
+router.post('/renew', auth, function (req, res, next) {
+  TokenService.renew(req, res, next);
+})
+
+router.post('/update', auth, function (req, res, next) {
+  TokenService.update(req, res, next);
 })
 
 export default router;

@@ -1,7 +1,10 @@
 import {Article} from "../models/article";
 import {getConnectionManager} from "typeorm";
+import { ListWrapper } from "../models/listWrapper";
+import { ListMeta } from "../models/listMeta";
 
 export class ArticleService {
+
 
     static createArticleDB(req: { body: any; }, res: any, next: any) {
 
@@ -20,11 +23,18 @@ export class ArticleService {
         const articles = getConnectionManager().get("default").getRepository(Article);
         let pageSize = req.query.size;
         let page = req.query.page;
+        let meta:any;
+
+        this.getAll().then(result => {
+            console.log("result", result)
+            meta = new ListMeta(pageSize, page, result/pageSize, 0)
+
+        })
 
         let startIndex: number = (page-1)*pageSize
 
         articles.find({skip:startIndex, take:pageSize}).then((articles) => {
-           res.send(articles)
+           res.send(new ListWrapper(articles, meta))
         });
     }
 
@@ -36,5 +46,12 @@ export class ArticleService {
           }).then((article) => {
            res.send(article)
         });
+    }
+
+    //Helper static func 
+    static async getAll() {
+        const articles = getConnectionManager().get("default").getRepository(Article);
+        let [allArticles, articleCount] = await articles.findAndCount();
+        return articleCount;
     }
 }

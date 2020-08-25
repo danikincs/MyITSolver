@@ -6,16 +6,15 @@ export class Article {
     @PrimaryGeneratedColumn()
     id: number;
 
-
-    @Column({
-        length:200
-    })
-    text: string;
-
     @Column({
         length:100
     })
     title: string;
+
+    @Column({
+        length:1000
+    })
+    text: string;
 
     @Column("text")
     imageUrl: string;
