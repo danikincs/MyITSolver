@@ -3,6 +3,7 @@ import {getConnectionManager} from "typeorm";
 import { ListWrapper } from "../models/listWrapper";
 import { ListMeta } from "../models/listMeta";
 import { ErrorHandler } from "../models/Error";
+import { TokenService } from "../service/tokenService";
 
 export class ArticleService {
 
@@ -10,15 +11,14 @@ export class ArticleService {
     static createArticleDB(req: { body: any; }, res: any, next: any) {
 
         try {
-            const { title, image, text } = req.body
-            console.log(title, image, text, req.body)
-            if(!title || !image || !text) {
+            const { title, imageURL, text } = req.body
+            if(!title || !imageURL || !text) {
                 throw new ErrorHandler(404, 'Missing required parameters.')
             }
 
             let article = new Article();
             article.title = title;
-            article.imageUrl = image;
+            article.imageUrl = imageURL;
             article.text = text;
             
             getConnectionManager().get("default").manager.save(article).then((article) => {
@@ -54,7 +54,6 @@ export class ArticleService {
     }
 
     static getArticleById(req: any, res: any, next: any) {
-
         try {
             const articles = getConnectionManager().get("default").getRepository(Article);
             articles.find({
@@ -63,7 +62,7 @@ export class ArticleService {
                 if(!article.length) {
                     throw new ErrorHandler(404, "Can't find article by the given id.")
                 }
-               res.send(article)
+                TokenService.update(req, res, next, article);
             }).catch(err => {
                 next(err)
             });

@@ -1,6 +1,4 @@
 import { ArticleService } from "../service/ArticleService";
-import { TokenService } from "../service/tokenService";
-
 
 export class ArticleController {
     static create_article(req: any, res: any, next: any) {
@@ -12,7 +10,6 @@ export class ArticleController {
     }
 
     static get_article_by_id(req: any, res: any, next: any) {
-        // TokenService.update(req, res, next);
-        ArticleService.getArticleById(req, res, next);
+            ArticleService.getArticleById(req, res, next);
     }
   }
