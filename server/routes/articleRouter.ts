@@ -5,7 +5,7 @@ import {auth} from "../middleware/auth";
 const router = express.Router();
 
 
-router.get('/get', auth,  function (req, res, next) {
+router.get('/get', auth, function (req, res, next) {
   ArticleController.get_article_by_id(req, res, next)
 })
 

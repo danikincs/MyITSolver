@@ -12,7 +12,7 @@ export class ArticleController {
     }
 
     static get_article_by_id(req: any, res: any, next: any) {
-        TokenService.update(req, res, next);
+        // TokenService.update(req, res, next);
         ArticleService.getArticleById(req, res, next);
     }
   }

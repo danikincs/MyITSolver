@@ -9,7 +9,8 @@ import dotenv from "dotenv";
 import bodyParser from 'body-parser';
 import { connectDB } from "./helpers/db"
 
-//Dotenv for database connections
+import { handleError } from "./helpers/erroHandler";
+
 dotenv.config();
 const app = express();
 const port = 3000;
@@ -26,6 +27,10 @@ connectDB();
 app.use('/api/token', token);
 app.use('/api/article', article);
 app.use('/api/image', image)
+
+app.use((err:any, req:any, res:any, next:any) => {
+  handleError(err, res);
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -7,7 +7,9 @@ export function auth(req : any, res : any, next: any) {
         next();
     } catch (error) {
         return res.status(401).json({
-            message: 'Auth failed'
+            status: "error",
+            statusCode: 401,
+            message: 'Authentication failed'
         });
     }
 };
