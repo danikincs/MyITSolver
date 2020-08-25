@@ -78,7 +78,6 @@ export class TokenService {
             if(!token) {
                 throw new ErrorHandler(404, "Can't find token")
             }  
-            console.log("token",token)
             if(token.usage > token.maxUsage) {
                throw new ErrorHandler(401, "Token usage limit reached. Please renew")
             }else {

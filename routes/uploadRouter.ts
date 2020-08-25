@@ -7,7 +7,6 @@ import fs from "fs";
 
 //Basic error handler
 const handleError = (err: any, res : any) => {
-    console.log("error a handleerror", err)
     res
       .status(500)
       .contentType("text/plain")
